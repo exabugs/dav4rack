@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary = 'WebDAV handler for Rack'
   s.author = 'exabugs'
   s.email = 'exabugs@gmail.com'
-  s.homepage = 'http://github.com/chrisroberts/dav4rack'
+  s.homepage = 'http://github.com/exabugs/dav4rack'
   s.description = 'WebDAV handler for Rack'
   s.require_path = 'lib'
   s.executables << 'dav4rack'
