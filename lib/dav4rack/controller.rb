@@ -416,7 +416,7 @@ module DAV4Rack
     def response_errors(xml, errors)
       for path, status in errors
         xml.response do
-          xml.href "#{scheme}://#{host}:#{port}#{path}"
+          xml.href "#{scheme}://#{host}:#{port}#{url_escape(path)}"
           xml.status "#{http_version} #{status.status_line}"
         end
       end
