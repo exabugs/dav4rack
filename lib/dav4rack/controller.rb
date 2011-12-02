@@ -137,7 +137,7 @@ module DAV4Rack
           response['Location'] = "#{scheme}://#{host}:#{port}#{url_escape(dest.public_path)}" if status == Created
           multistatus do |xml|
             xml.response do
-              xml.href "#{scheme}://#{host}:#{port}#{status == Created ? dest.public_path : resource.public_path}"
+              xml.href "#{scheme}://#{host}:#{port}#{url_escape(status == Created ? dest.public_path : resource.public_path)}"
               xml.status "#{http_version} #{status.status_line}"
             end
           end
