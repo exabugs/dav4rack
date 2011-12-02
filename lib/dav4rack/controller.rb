@@ -138,8 +138,7 @@ module DAV4Rack
             return Conflict unless depth.is_a?(Symbol) || depth > 1
             status = resource.move(dest, overwrite)
           end
-          response['Location'] = "#{scheme}://#{host}:#{port}#{dest.public_path}" if status == Created
-          response['Location'] = url_escape(response['Location'])
+          response['Location'] = "#{scheme}://#{host}:#{port}#{url_escape(dest.public_path)}" if status == Created
           multistatus do |xml|
             xml.response do
               xml.href "#{scheme}://#{host}:#{port}#{status == Created ? dest.public_path : resource.public_path}"
