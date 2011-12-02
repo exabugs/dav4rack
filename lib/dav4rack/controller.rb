@@ -77,8 +77,7 @@ module DAV4Rack
       else
         resource.lock_check
         status = resource.put(request, response)
-        response['Location'] = "#{scheme}://#{host}:#{port}#{resource.public_path}" if status == Created
-        response['Location'] = url_escape(response['Location'])
+        response['Location'] = "#{scheme}://#{host}:#{port}#{url_escape(resource.public_path)}" if status == Created
         response.body = response['Location']
         status
       end
