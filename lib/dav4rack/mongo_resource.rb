@@ -5,8 +5,6 @@ module DAV4Rack
 
   class MongoResource < DAV4Rack::Resource
 
-#    @@logger = Rails.logger
-
     def initialize(public_path, path, request, response, options)
       # 'ASCII-8BIT'で渡される場合があるので'UTF-8'を指定しておく
       _force_encoding!(public_path)
@@ -264,8 +262,6 @@ module DAV4Rack
       # 0バイトのファイルを作成しディレクトリの代わりとする
       @filesystem.open(file_path, "w") { |f| } if !bson
  
-#      @@logger.error('make_collection : ' + file_path)
-
       Created
     end
 
