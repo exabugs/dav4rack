@@ -19,7 +19,7 @@ a pull request with your modifications. If you are just here to use the library,
 
 === Via RubyGems
 
-    Sorry, I don't know.
+Sorry, I don't know.
 
     gem install dav4rack
     
