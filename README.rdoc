@@ -1,24 +1,25 @@
 == DAV4Rack - Web Authoring for Rack
 
 DAV4Rack is a framework for providing WebDAV via Rack allowing content
-authoring over HTTP. It is based off the {original RackDAV framework}[http://github.com/georgi/rack_dav]
+authoring over HTTP. It is based off the {original DAV4Rack framework}[http://github.com/chrisroberts/dav4rack]
 adding some useful new features:
 
-* Better resource support for building fully virtualized resource structures
-* Generic locking as well as Resource level specific locking
-* Interceptor middleware to provide virtual mapping to resources
-* Mapped resource paths
-* Authentication support
-* Resource callbacks
-* Remote file proxying (including sendfile support for remote files)
-* Nokogiri based document parsing and building
+* MongoDB(GridFS) support (MongoResource).
+* Multi-byte problem fixed.
+* Response code problem (207:Multi-Status) fixed (MKCOL,MOVE,COPY).
 
 If you find issues, please create a new issue on github. If you have fixes, please fork the repo and send me
 a pull request with your modifications. If you are just here to use the library, enjoy!
 
 == Install
 
+=== Via Gemfile
+
+    gem 'dav4rack', :git => "git://github.com/exabugs/dav4rack.git"
+
 === Via RubyGems
+
+    Sorry, I don't know.
 
     gem install dav4rack
     
@@ -39,6 +40,22 @@ so if you are having slowness issues, install one of them and restart the dav4ra
 The simple file resource allows very basic authentication which is used for an example. To enable it:
 
     dav4rack --username=user --password=pass
+
+== RubyOnRails3
+
+routes.rb add below.
+
+  mount DAV4Rack::Handler.new(
+    :root => '/webdav',
+    :root_uri_path => ActionController::Base.config.relative_url_root.to_s + '/grid/content',
+    :resource_class => ::DAV4Rack::MongoResource
+  ), :at => '/grid/content/'
+
+  mount DAV4Rack::Handler.new(
+    :root => Rails.root.to_s + "/tmp",
+    :root_uri_path => ActionController::Base.config.relative_url_root.to_s + '/real/content',
+    :resource_class => ::DAV4Rack::FileResource
+  ), :at => '/real/content/'
 
 == Rack Handler
 
