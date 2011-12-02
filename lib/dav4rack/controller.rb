@@ -1,5 +1,3 @@
-require 'uri'
-
 module DAV4Rack
   
   class Controller
